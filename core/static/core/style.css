@@ -1,0 +1,86 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family:  sans-serif;
+  /*  background: url(../images/hero.jpg)no-repeat center top; */
+    background-attachment: fixed;
+    background-size: cover;
+
+
+}
+
+h1{
+    color: #fff;
+    text-align: center;
+}
+
+.form-register{
+    width: 95%;
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    border-radius: 7px;
+    height: 655px;
+
+}
+
+.form-registerr{
+    width: 95%;
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    border-radius: 7px;
+    height: 514px;
+
+}
+
+.form_titulo{
+    background-color:#2f3530;
+    color: #fff;
+    padding: 20px;
+    text-align:  center;
+    font-weight: 100;
+    font-size: 30px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+   /* border-bottom: 5px solid #349228; */
+}
+
+
+input{
+    margin-bottom: 15px;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid darkgray;
+}
+.container-inputs{
+    padding:  10px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   
+}
+
+.input-100{
+    width: 100%;
+    
+}
+
+.btn-enviar{
+    background: green;
+    color: black;
+    margin: auto;
+    padding: 10px 40px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    color: white;
+}
+.btn-enviar:active{
+    transform:scale(1.05);
+
+}

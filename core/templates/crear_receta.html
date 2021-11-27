@@ -1,0 +1,162 @@
+{% load static %}
+{% load user_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receta</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'css/colors/orange.css' %}" />
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'core/style.css' %}" />
+    <script src="{% static 'js/validar-receta.js' %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'core/style.css' %}" />
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'core/nav.css' %}" />
+
+</head>
+
+<body>
+    <header>
+        <input type="checkbox" id="btn-menu"> 
+        <label for="btn-menu">  <img src="{% static 'images/menu2.png' %}" alt=""></label>
+
+    
+        <nav class="menu">
+            {% if request.user|has_group:"cocinero" %}
+            <ul    style=" background-color: #2f3530;">
+                <li><a href="{% url 'home' %}">Restaurant Siglo XXI</a></li>
+                <li><a href="{% url 'salir' %}">Cerrar Sesion</a></li>
+                <li><a href="{% url 'crearReceta' %}">Recetas</a></li>
+                <li><a href="{% url 'listarReceta' %}">Listado de receta</a></li>
+                <li><a>Bienvenido {{request.user.username}}</a></li>
+            </ul>
+            {% else %}
+            <ul    style=" background-color: #2f3530;">
+                <li><a href="{% url 'home' %}">Restaurant Siglo XXI</a></li>
+                <li><a href="{% url 'salir' %}">Cerrar Sesion</a></li>
+                <li><a href="{% url 'productos' %}">Productos</a></li>
+                <li><a href="{% url 'empleados' %}">Empleados</a></li>
+                <li><a href="{% url 'crearReceta' %}">Recetas</a></li>
+                <li><a href="{% url 'listarReceta' %}">Listado de receta</a></li>
+                <li><a>Bienvenido {{request.user.username}}</a></li>
+            </ul>
+            {% endif %}
+        </nav>
+    </header>
+    
+    <form action="" method="POST" onsubmit="return validar();" enctype="multipart/form-data" class="form-register" style="    width: 95%;
+    max-width: 500px;
+    margin: auto;
+    background: white;
+        margin-top: 20px;
+        border-radius: 7px;
+    height: 687px;">
+        {% csrf_token %}
+
+        <h2 class="form_titulo">📜 Agregar Receta</h2>
+        <div class="container-inputs">
+        
+            <label for="">Nombre Receta</label>
+            <input type="text" name="nombre" class="input-100" id="nombre_receta" required style="height: 40px;">
+        
+            <div class="productos" > 
+
+
+            <label for="">Producto 1</label>
+            <select name="producto" class="input-100" style="height: 8%; margin-top: 3px;" required>
+                <option value="">Seleccionar</option>
+                {% for p in productos %}
+                    <option value="{{ p.1 }}">{{ p.1 }}</option>
+                {% endfor %}
+            </select>
+
+            <br>
+
+            <label for="">Producto 2</label>
+            <select name="producto2" class="input-100" style="height: 8%; margin-top: 3px;" required>
+                <option value="">Seleccionar</option>
+                {% for p in productos %}
+                    <option value="{{ p.1 }}">{{ p.1 }}</option>
+                {% endfor %}
+            </select>
+
+            <br>
+
+            <label for="">Producto 3</label>
+            <select name="producto3" class="input-100" style="height: 8%; margin-top: 3px;" required>
+                <option value="">Seleccionar</option>
+                {% for p in productos %}
+                    <option value="{{ p.1 }}">{{ p.1 }}</option>
+                {% endfor %}
+            </select>
+
+            <br>
+            
+            <label for="">Producto 4</label>
+            <select name="producto4" class="input-100" style="height: 8%; margin-top: 3px;" required >
+                <option value="">Seleccionar</option>
+                {% for p in productos %}
+                    <option value="{{ p.1 }}">{{ p.1 }}</option>
+                {% endfor %}
+            </select>
+
+            <br>
+
+            <label for="">Imagen Receta</label>
+            <input type="file" name="imagen" class="input-100" id="imagen_receta" style="height: 8%; margin-top: 3px;" required>
+        
+            <label for="">Valor Receta</label>
+            <input type="text" name="valor" class="input-100" id="valor_receta" style="height: 8%; margin-top: 3px;" required>
+
+
+        </div>
+        
+        
+
+            <input type="submit" value="Guardar" onclick="javascript:validarF();" class="btn-enviar" style="    background: green;
+            color: white;
+            margin: auto;
+            padding: 10px 40px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 14px;
+            border-color: #4cae4c;">
+
+         
+
+    
+    <a href="{% url 'pedidos' %}" 
+    
+    style="padding: 10px;
+    background: #e8880a;
+    font-size: 16px;
+    color: black;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-left: 31px;
+    height: 42px;
+    margin-top: 13px; "> Ingresar pedidos
+</a>
+
+        </div>
+        {{ mensaje }}
+        
+    </form>
+
+
+
+    
+
+    
+
+
+</body>
+</html>

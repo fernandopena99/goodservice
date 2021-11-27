@@ -1,0 +1,85 @@
+{% load static %}
+{% load user_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{% static 'js/app.js' %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'core/style.css' %}" />
+    <link id="changeable-colors" rel="stylesheet" href="{% static 'core/nav.css' %}" />
+    <title>Modificar Producto</title>
+</head>
+<body>
+    <header>
+        <input type="checkbox" id="btn-menu"> 
+        <label for="btn-menu">  <img src="{% static 'images/menu2.png' %}" alt=""></label>
+
+    
+        <nav class="menu">
+            {% if request.user|has_group:"bodeguero" %}
+            <ul>
+                <li><a href="{% url 'home' %}">Restaurant Siglo XXI</a></li>
+                <li><a href="{% url 'salir' %}">Cerrar Sesion</a></li>
+                <li><a href="{% url 'productos' %}">Productos</a></li>
+                <li><a>Bienvenido {{request.user.username}}</a></li>
+            </ul>
+            {% else %}
+            <ul>
+                <li><a href="{% url 'home' %}">Restaurant Siglo XXI</a></li>
+                <li><a href="{% url 'salir' %}">Cerrar Sesion</a></li>
+                <li><a href="{% url 'productos' %}">Productos</a></li>
+                <li><a href="{% url 'empleados' %}">Empleados</a></li>
+                <li><a href="{% url 'crearReceta' %}">Recetas</a></li>
+                <li><a>Bienvenido {{request.user.username}}</a></li>
+            </ul>
+            {% endif %}
+        </nav>
+    </header>
+    
+    <form action="" method="POST"  onsubmit="return validar();" class="form-register">
+        {% csrf_token %}
+        {% for p in producto %}
+        
+        <h2  class="form_titulo">Modificar Productos</h2>
+        <div class="container-inputs">
+            <input type="hidden" name="id_producto" value="{{p.0}}" readonly class="input-100">
+        
+            <label for="">Nombre Producto</label>
+            <input type="text" name="nombre_producto"id="nombre_producto"  value="{{p.1}}" class="input-100">
+        
+            <label for="">Detalle Producto</label>
+            <input type="text" name="detalle_producto" id="detalle_producto" value="{{p.2}}" class="input-100">
+        
+            <label for="">Cantidad Disponible</label>
+            <input type="number" name="cantidad_disponible" id="cantidad_disponible" value="{{p.3}}" class="input-100">
+        
+            <label for="">Fecha compra</label>
+            <input type="date" name="fecha_compra" value="{{p.4}}" id="fecha_compra" class="input-100">
+        
+            <label for="">Valor unitario</label>
+            <input type="number" name="valor_unitario" value="{{p.5}}" id="valor_unitario" class="input-100">
+        
+            <label for="">Empleado</label>
+            <select name="id_empleado" id="id_empleado" value="{{p.6}}" id="id_empleado" class="input-100" style="height: 35px;">
+                <option value="">{{p.6}}</option>
+                {% for e in empleado %}
+                    <option value="{{ e.0 }}">{{ e.1 }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Guardar" onclick="javascript:validarF();" value="Guardar" class="btn-enviar">
+            
+        </div>
+        {% endfor %}
+        
+        {{ mensaje }}
+    </form>
+    
+    
+
+</body>
+</html>
